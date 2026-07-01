@@ -1,0 +1,8 @@
+1. **Gộp hàm phụ thành Câu hỏi:** Các hàm kiểm tra điều kiện (như `CanJump()`, `CanDash()`) chỉ đóng vai trò là một **Khối hình thoi (Câu hỏi Yes/No)** nằm trên luồng chính. KHÔNG cần vẽ chi tiết logic nội bộ của hàm đó vào sơ đồ của luồng chính (để tránh rối sơ đồ).
+2. **Luồng trả về của hàm (True/False):** Hàm kiểm tra chỉ làm nhiệm vụ tính toán rồi trả về kết quả `True` hoặc `False`. Sau khi có kết quả, hàm đó lập tức kết thúc và trao quyền đi tiếp lại cho luồng chính.
+3. **Đường đi của mũi tên `False`:** Nhánh `False` không bao giờ bị "vứt không". Khi hàm trả về `False`, mũi tên sẽ chạy đi tìm và đâm thẳng vào lệnh kiểm tra tiếp theo (ví dụ: bỏ qua `Jump` để đi thẳng xuống `else if WallJump`) trong chính cái luồng `Update()` ban đầu đó.
+4. **Cách biểu diễn logic bên trong Hình Thoi:** Có 2 cách tùy thuộc vào mục đích của báo cáo:
+    - **Cách 1: Gộp chung (Khuyên dùng cho báo cáo tổng thể)** Vẽ 1 hình thoi và ghi gộp điều kiện: `LastOnGroundTime > 0 AND !IsJumping`.
+        - Nhánh `True`: Đi xuống thực hiện hành động.
+        - Nhánh `False`: Đi tiếp luồng chính. $\rightarrow$ _Ưu điểm:_ Bao quát logic nhanh gọn, tiết kiệm không gian, dễ đọc.
+    - **Cách 2: Tách chi tiết từng vế (Mô phỏng máy tính chạy `&&`)** Vẽ 2 hình thoi nối tiếp: Hình thoi 1 (`LastOnGround > 0?`) $\rightarrow$ Nếu `True` mới sang Hình thoi 2 (`!IsJumping?`). Mũi tên `False` của cả 2 hình thoi đều chụm lại đi tiếp luồng chính. $\rightarrow$ _Ưu điểm:_ Thể hiện rõ tính chất ngắt mạch (Short-circuit) của toán tử `&&` trong C#.
