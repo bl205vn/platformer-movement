@@ -64,7 +64,7 @@ public class PlayerData : ScriptableObject
 	[Tooltip("Lực bật nhảy khỏi tường (Trục X = bật ra xa, Trục Y = bật lên cao)")]
 	public Vector2 wallJumpForce;
 	[Space(5)]
-	[Tooltip("Độ bẻ lái sau khi nhảy tường. Càng gần 0 thì người chơi càng khó bẻ lái quay lại tường ngay lập tức.")]
+	[Tooltip("Độ bẻ lái sau khi nhảy tường.\nCàng gần 0 thì người chơi càng khó bẻ lái quay lại tường ngay lập tức.\nCòn về 1 thì toàn quyền kiểm soát nhưng tốc độ nhảy tường thuộc hoàn toàn vào runMaxSpeed")]
 	[Range(0f, 1f)] public float wallJumpRunLerp; //Giảm bớt ảnh hưởng của sự di chuyển của người chơi khi đang nhảy tường.
 	[Tooltip("Thời gian bị 'Khóa vô lăng' (mất kiểm soát di chuyển ngang) ngay sau khi nhảy tường.")]
 	[Range(0f, 1.5f)] public float wallJumpTime; //Thời gian sau khi nhảy tường mà di chuyển của người chơi bị làm chậm lại.

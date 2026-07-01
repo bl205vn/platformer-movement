@@ -53,6 +53,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleFire()
     {
+        // Khóa bắn khi đang bám tường / leo tường
+        if (_movement.IsSliding) return;
+
         // Giữ chuột trái → bắn liên tục theo fireRate
         // GetMouseButton(0) trả về true từ frame đầu giữ nút nên bao luôn cả click đơn
         if (Input.GetMouseButton(0) && Time.time >= _lastFireTime + Data.fireRate)
