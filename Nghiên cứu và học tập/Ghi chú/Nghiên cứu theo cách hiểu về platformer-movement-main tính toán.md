@@ -210,7 +210,7 @@ Lưu ý: ==Trong C#, bất kỳ phép logic hay so sánh nào (`>`, `<`, `>=`,
     
 6. **Kiểm tra có thể lướt không (`CanDash`)**:
     
-    - _Bước 1:_ Nếu KHÔNG đang lướt (!**IsDashing**) VÀ số lần lướt chưa đạt mức tối đa (**dashesLeft < Data.dashAmount**) VÀ chạm đất còn hiệu lực (**LastOnGroundTime** > 0) VÀ chưa trong tiến trình hồi lướt (!**_dashRefilling**), thì kích hoạt xử lý song song (`StartCoroutine`) hàm **RefillDash** để tự nạp lại lướt.
+    - _Bước 1:_ Nếu KHÔNG đang lướt (!**IsDashing**) VÀ số lần lướt chưa đạt mức tối đa (**dashesLeft < Data.dashAmount**) VÀ chạm đất còn hiệu lực (**LastOnGroundTime** > 0) HOẶC đang bám tường (**LastOnWallLeftTime** > 0) VÀ chưa trong tiến trình hồi lướt (!**_dashRefilling**), thì kích hoạt xử lý song song (`StartCoroutine`) hàm **RefillDash** để tự nạp lại lướt.
     - _Bước 2:_ Trả về `true` nếu số lần lướt còn lại lớn hơn 0 (**dashesLeft** > 0), ngược lại nếu đã hết số lần lướt thì trả về `false`.
       
 7. **Kiểm tra có thể trượt tường không (`CanSlide`)**: bằng cách trả về `true` khi đang bám tường (**LastOnWallTime** > 0) VÀ KHÔNG đang nhảy (!**IsJumping**) VÀ KHÔNG đang nhảy tường (!**IsWallJumping**) VÀ KHÔNG đang lướt (!**IsDashing**) VÀ KHÔNG chạm mặt đất (**LastOnGroundTime** <= 0). Ngược lại nếu 1 trong các vế này vi phạm (ví dụ đang lướt hoặc đang chạm đất) thì trả về `false`.
